@@ -74,7 +74,7 @@ def rent_the_copy(game_id):
              print(f'copy of the game_id: {game_id} is available and the copy_id is{copy_id}')
 
              c.execute('UPDATE Game_Copies SET availability_status = "Not Available" WHERE game_id = :game_id AND copy_id = :copy_id', {'game_id': game_id, 'copy_id': copy_id})
-             
+             con.commit()
              print(f"succesfully rented gameid: {game_id} and the copyid is : {copy_id} ")
          else: 
             print("there are no available copies to rent") 
@@ -91,6 +91,7 @@ def insert_rental_record(cus_id, copy_id, game_id):
 
         query = 'INSERT INTO Rentals (game_id, copy_id, customer_id, rental_date, return_date) VALUES (:game_id, :copy_id, :customer_id, :rental_date, :return_date)'
         c.execute(query,{'game_id':game_id, 'copy_id':copy_id, 'customer_id':cus_id,'rental_date':rental_date,'return_date':return_date})
+        con.commit()
         print("succesfully inserted the record")
 
  
